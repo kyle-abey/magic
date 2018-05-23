@@ -14,7 +14,7 @@ function newDrop() {
     generateDrop(x, y, num);
     num--;
     if (num > 0) {
-        setTimeout(newDrop, 200);
+        setTimeout(newDrop, 100);
         //this will always be constant if num=infinity
     }
 }
