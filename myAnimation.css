@@ -138,7 +138,7 @@ body {
 #negative {
     position: absolute;
     left: 1200px;
-    top: 200px;
+    top: 600px;
     animation: spin linear;
     animation-duration: 5s;
     animation-iteration-count: infinite;
@@ -176,4 +176,13 @@ body {
 #content {
     height: 100%;
     width: 100%;
+}
+
+#magic {
+    animation: spin linear;
+    position: absolute;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    top: 450px;
+    left: 100px;
 }
