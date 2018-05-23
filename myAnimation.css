@@ -128,16 +128,16 @@ body {
 
 #head {
     animation: spin linear;
-    position: relative;
-    left: 50px;
-    top: 100px;
+    position: absolute;
+    left: 200px;
+    top: 250px;
     animation-duration: 3s;
     animation-iteration-count: infinite;
 }
 
 #negative {
-    position: relative;
-    left: 800px;
+    position: absolute;
+    left: 1200px;
     top: 200px;
     animation: spin linear;
     animation-duration: 5s;
@@ -150,6 +150,8 @@ body {
     animation-duration: 1s;
     animation-iteration-count: infinite;
     text-align: center;
+    font-size: 200px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 #spinner {
