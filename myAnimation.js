@@ -1,58 +1,41 @@
-
-// number of drops created.
-var nbDrop = 858;
-
-// function to generate a random number range.
-function randRange( minNum, maxNum) {
-  return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);
+//code skeleton from https://stackoverflow.com/users/567595/stuart
+function generateDrop(posLeft, posTop, d) {
+    var drop = document.createElement('div');
+    drop.className = 'rain';
+    drop.style.left = posLeft + 'px';
+    drop.style.top = posTop + 'px';
+    drop.id = 'd';
+    document.getElementById('content').appendChild(drop);
 }
 
-// function to generate drops
-function createRain() {
-
-	for( i=1;i<nbDrop;i++) {
-	var dropTop = randRange(-1000,1400);
-
-	$('.rain').append('<div class="drop" id="drop'+i+'"></div>');
-	$('#drop'+i).css('top',dropTop);
-	}
-
-}
-// Make it rain
-createRain();
-
-function Box() {
-    this.xpos = xpos;
-    this.ypos = ypos;
-    this.xstep = xstep;
-    this.ystep = ystep;
-    this.id = id;
-    var elem = document.getElementById(this.id);
-    this.render = function () {
-        elem.style.top = this.ypos + 'px';
-        elem.style.left = this.xpos + 'px';
+function newDrop() {
+    var x = Math.floor(Math.random() * 2000) + 50,
+        y = Math.floor(Math.random() * -200) -100
+    generateDrop(x, y, num);
+    num--;
+    if (num > 0) {
+        setTimeout(newDrop, 200);
+        //this will always be constant if num=infinity
     }
 }
 
-var box1 = new Box(0, 0, 1, 2, "animation1");
-var box2 = new Box(100, 0, 5, 5, "animation2");
-
-var boxes = [box1, box2];
-
-var id = setInterval(frame, 5);
-
-function frame() {
-
-    for (var i = 0; i < boxes.length; i++) {
-        if (boxes[i].xpos > 350 || boxes[i].xpos < 0) {
-            boxes[i].xstep = -boxes[i].xstep;
+function rainBrandon() {
+    num = Infinity;
+    newDrop();
+    interval = setInterval(function () {
+        var drops = document.getElementsByClassName('rain'),
+            newYpos;
+        if (drops.length == 0) {
+            clearInterval(interval);
+            return;
         }
-        if (boxes[i].ypos > 350 || boxes[i].ypos < 0) {
-            boxes[i].ystep = -boxes[i].ystep;
+        for (var i = 0; i < drops.length; i++) {
+            newYpos = drops[i].offsetTop + 5;
+            if (newYpos > drops[i].parentNode.offsetHeight) {
+                drops[i].parentNode.removeChild(drops[i]);
+            } else {
+                drops[i].style.top = newYpos + 'px';
+            }
         }
-
-        boxes[i].xpos = boxes[i].xpos + boxes[i].xstep;
-        boxes[i].ypos = boxes[i].ypos + boxes[i].ystep;
-        boxes[i].render();
-    }
+    }, 30); //leaving 30ms as the frame rate
 }
